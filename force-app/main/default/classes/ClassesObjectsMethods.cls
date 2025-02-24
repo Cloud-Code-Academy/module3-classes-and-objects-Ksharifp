@@ -26,7 +26,7 @@
  * Math class: https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_math.htm
  * Classes: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_understanding.htm
  *
- * @author Your Name
+ * @author Kharaam Sharifpour
  */
 
 public with sharing class ClassesObjectsMethods {
@@ -40,17 +40,23 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<String> practiceStringMethods() {
         // Initialize a String with 'Hello, Salesforce!'
-        
+        String helloSF = 'Hello, Salesforce!';
         // Get the length of the String        
+        Integer numOfChar = helloSF.length();
+        String strNumOfChar = String.valueof(numOfChar);
         // Get a substring of the String of the first 5 characters
+        String firstfiveHelloSF = helloSF.left(5);
         // Convert the String to lower case
-        
+        String lowerHelloSF = helloSF.toLowerCase();
         // Return the list with the string data
+        List<String> helloSFStr = new List<String>();
         // In the first position add the string length
+        helloSFStr.add(strNumOfChar);
         // In the second position add the substring
+        helloSFStr.add(firstfiveHelloSF);
         // In the third position add the string in lower case
-
-        return null; // Replace null with the variable you used to store the result
+        helloSFStr.add(lowerHelloSF);
+        return helloSFStr; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -62,14 +68,21 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<Boolean> checkStringContent(String input) {
         // Initialize a list to store the results
-        
+        List<Boolean> trueORFalseList = new List<Boolean>();
         // Check if the string starts with 'Sales'
-        
+        String sales = 'Sales';
+        Boolean startsWithSales = input.startsWith(sales);
         // Check if the string ends with 'Force'
-        
+        String force = 'Force';
+        Boolean endsWithForce = input.endsWith(force);
         // Check if the string contains 'Awesome'
-        
-        return null; // Replace null with the variable you used to store the result
+        String awesome = 'Awesome';
+        Boolean contAwesome = input.contains(awesome);
+        trueORFalseList.add(startsWithSales);
+        trueORFalseList.add(endsWithForce);
+        trueORFalseList.add(contAwesome);
+    
+        return trueORFalseList; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -81,15 +94,14 @@ public with sharing class ClassesObjectsMethods {
      */
     public static String removeDuplicateWords(String sentence) {
         // Split the sentence into words
-
+        List<String> separatedWords = sentence.split(' ');
         // Create a set to store the unique words
-
+        Set<String> uniqWords = new Set<String>(separatedWords);
         // Add each word to the set
-
         // Join the unique words back into a sentence
-
+        String withoutDuplicateWords = String.join(uniqWords, ' ');
         // Return the sentence with unique words
-        return null; // Replace null with the variable you used to store the result
+        return withoutDuplicateWords; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -102,7 +114,48 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Integer countVowels(String str) {
         // Initialize the result Integer
-
+        /* the idea behind this:
+        Declared an integer for number of vowels = numVowels
+        This will be returned at the end.
+        Declared another integer for the number of characters in the input string str
+        This integer will be used to loop through all the characters of input string str
+        Declared a string to store each character of the input str inside the loop
+        The method inside the loop will compare this singleChar with the vowel in the String List Vowels
+        The String List of Vowels 'vowels' is created to be compared against the characters of the input string str
+        The String List 'charsInStr' is created to store the separated characters of the input string str
+        The first loop goes through the characters of the input string, 
+        if the string has no characters or is null, it will return 0.
+        if the string contains chracters, it will separate the characters using the substring 
+        then adds each character to the 'charsInStr' string list.
+        The second loop will go through all the separated charaters in 'charsInStr'
+        if the 'vowels' list contains the character in the loop, 
+        number 1 will be added to the 'numVowels' 
+        the numVowels will then return at the end.
+        */
+        Integer numVowels = 0;
+        Integer numCharinStr = str.length();
+        String singleChar;
+        List<String> vowels = new List<String>{'a','e','i','o','u'};
+        List<String> charsInStr = new List<String>();
+        if (numCharinStr == 0 || str == null) {
+            return 0; 
+        } else { 
+            for (Integer i = 0; i < numCharinStr ; i++) {
+              if ( str.substring(i, i + 2).isWhitespace() != true ) {
+                singleChar = (str.substring(i, i + 2));
+                charsInStr.add(singleChar);
+              }
+            }
+        }
+        for (Integer i = 0; i < (charsInStr.size()); i++) {
+            if ( charsInStr.size() == 0 || charsInStr == null ) {
+                return 0;
+            } else if (vowels.contains(charsInStr.get(i)) == true) {
+                numVowels =+ 1;
+            }
+        }
+        return numVowels;   // Replace null with the variable you used to store the result
+    
         /*
         for () {
             // get individual characters from the string - hint use substring or split
@@ -110,8 +163,7 @@ public with sharing class ClassesObjectsMethods {
             // if it is a vowel, increment the result Integer
         }
         */
-
-        return null; // Replace null with the variable you used to store the result
+        
     }
 
     /**
