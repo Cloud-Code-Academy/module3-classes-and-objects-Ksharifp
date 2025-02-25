@@ -111,59 +111,43 @@ public with sharing class ClassesObjectsMethods {
      * Example: countVowels("Hello World!") should return 3
      * @param s The string in which to count vowels.
      * @return The number of vowels in the string.
-     */
-    public static Integer countVowels(String str) {
-        // Initialize the result Integer
-        /* the idea behind this:
-        Declared an integer for number of vowels = numVowels
-        This will be returned at the end.
-        Declared another integer for the number of characters in the input string str
-        This integer will be used to loop through all the characters of input string str
-        Declared a string to store each character of the input str inside the loop
-        The method inside the loop will compare this singleChar with the vowel in the String List Vowels
-        The String List of Vowels 'vowels' is created to be compared against the characters of the input string str
-        The String List 'charsInStr' is created to store the separated characters of the input string str
-        The first loop goes through the characters of the input string, 
-        if the string has no characters or is null, it will return 0.
-        if the string contains chracters, it will separate the characters using the substring 
-        then adds each character to the 'charsInStr' string list.
-        The second loop will go through all the separated charaters in 'charsInStr'
-        if the 'vowels' list contains the character in the loop, 
-        number 1 will be added to the 'numVowels' 
-        the numVowels will then return at the end.
-        */
-        Integer numVowels = 0;
-        Integer numCharinStr = str.length();
-        String singleChar;
-        List<String> vowels = new List<String>{'a','e','i','o','u'};
-        List<String> charsInStr = new List<String>();
-        if (numCharinStr == 0 || str == null) {
-            return 0; 
-        } else { 
-            for (Integer i = 0; i < numCharinStr ; i++) {
-              if ( str.substring(i, i + 2).isWhitespace() != true ) {
-                singleChar = (str.substring(i, i + 2));
-                charsInStr.add(singleChar);
-              }
-            }
-        }
-        for (Integer i = 0; i < (charsInStr.size()); i++) {
-            if ( charsInStr.size() == 0 || charsInStr == null ) {
-                return 0;
-            } else if (vowels.contains(charsInStr.get(i)) == true) {
-                numVowels =+ 1;
-            }
-        }
-        return numVowels;   // Replace null with the variable you used to store the result
-    
-        /*
+     * 
+     *  /*
         for () {
             // get individual characters from the string - hint use substring or split
             // check if the character is a vowel
             // if it is a vowel, increment the result Integer
         }
-        */
-        
+    */
+    
+    public static Integer countVowels(String str) {
+        // Initialize the result Integer
+        Integer numVowels = 0;
+        Integer numCharinStr = str.length();
+        String singleChar;
+        List<String> vowels = new List<String>{'a','e','i','o','u'};
+        List<String> charsInStr = new List<String>();
+        if (  str == null || numCharinStr == 0) {
+            return 0; 
+        } else { 
+            for (Integer i = 0; i < numCharinStr ; i++) {
+              if (  i <= numCharinStr - 2 ) {
+                singleChar = (str.substring(i, i + 1).toLowerCase());
+                
+              } else if ( i == numCharinStr - 1 ){
+                singleChar = str.substring(i).toLowerCase();
+              }
+            charsInStr.add(singleChar);
+            }
+        }
+        for (Integer i = 0; i < (charsInStr.size()); i++) {
+            if ( charsInStr == null || charsInStr.isEmpty()) {
+                return 0;
+            } else if (vowels.contains(charsInStr.get(i))) {
+                numVowels += 1;
+            }
+        }
+        return numVowels;   // Replace null with the variable you used to store the result
     }
 
     /**
@@ -174,20 +158,30 @@ public with sharing class ClassesObjectsMethods {
      * @return A string containing the names of scientists that contain the letter 'g'.
      */
     public static String findTheScientist() {
+
+        String mystryLetterG = 'g';
         // The list of scientists' names
         List<String> scientistNames = new List<String>{'Tim Berners-Lee', 'Alan Turing', 'Grace Hopper', 'Donald Knuth', 'Guido van Rossum', 'Ken Thompson', 'Stephen Hawking'};
 
         // The variable to store the concatenated string
-
+        String theScientistsWithG ='';
         // Loop through the list of scientists' names
-
+        for (String sName : scientistNames) {
             // If the name doesn't contain the letter 'G', skip this iteration
-
-            // Add the name to the result string, followed by a comma
-
-        // Remove the last comma from the result string
-
-        return null; // Replace null with the variable you used to store the result
+            if (sName.containsIgnoreCase(mystryLetterG)) {
+                // Add the name to the result string, followed by a comma
+                theScientistsWithG += sName + ',';
+            }
+        // Remove the last comma from the result string - I removed both the first and last comma
+        }
+        if (theScientistsWithG.startsWith(',')) {
+            theScientistsWithG = theScientistsWithG.substring(1, theScientistsWithG.length());
+         }
+        if (theScientistsWithG.endsWith(',')) {
+           theScientistsWithG = theScientistsWithG.substring(0, theScientistsWithG.length() - 1);
+        }
+        
+        return theScientistsWithG; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -200,11 +194,12 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Double calculateDifferenceOfSquares(Double a, Double b) {
         // Square the input numbers using the Math.pow() function
-
+        Double squaredA = Math.pow(a, 2);
+        Double squaredB = Math.pow(b, 2);
         // Calculate the absolute difference using Math.abs() function
-
+        Double absDifference = Math.Abs(squaredA - squaredB);
         // Return the result
-        return null; // Replace null with the variable you used to store the result
+        return absDifference; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -215,9 +210,9 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Integer generateRandomNumber() {
         // Use Math class to generate number between 50 and 100
-
-        // Return the random integer
-        return null; // Replace null with the variable you used to store the result
+        Integer betweenFiftyandHundred = Math.round(Math.random() * (100 - 50) ) + 50;
+        // Return the random integer --- what I used https://developer.salesforce.com/blogs/2015/11/pk-chunking-techniques-massive-orgs
+        return betweenFiftyandHundred; // Replace null with the variable you used to store the result
     }
 
     /**
