@@ -369,22 +369,20 @@ public with sharing class ClassesObjectsMethods {
         // For example, introduceYourself() should return a string like "Hello, my name is John Doe and I am 28 years old."
 
         // Getter method that returns the name of the person
-        public string getName () {
-        return name;
+        public String getName() {
+            return name;
         }
         // Getter method that returns the age of the person
-        public Integer getAge () {
-        return age;
+        public Integer getAge() {
+            return age;
         }
         // Setter method that sets the name of the person
-        public string setName (String newName) {
-        name = newName;
-        return name;
+        public void setName(String newName) {
+            name = newName;
         }
         // Setter method that sets the age of the person
-        public Integer setAge (Integer newAge) {
-        age = newAge;
-        return age;
+        public void setAge(Integer newAge) {
+            age = newAge;
         }
     }
 
@@ -405,7 +403,7 @@ public with sharing class ClassesObjectsMethods {
         // Get the name of the person using the getter method and add it to the list
         results.add(johnDoe.getName());
         // Get the age of the person using the getter method and add it to the list
-        results.add(johnDoe.getAge.toString());
+        results.add(johnDoe.getAge().toString());
         return results; // Replace null with the variable you used to store the result
     }
 
